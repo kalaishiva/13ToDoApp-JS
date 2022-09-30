@@ -11,11 +11,10 @@ let contentContainer = document.querySelector(".container");
 console.log(contentContainer);
 
 
-
-
-
 addBtn.addEventListener('click', addContent);
 
+
+//add button clicked
 function addContent() {
 
 
@@ -28,36 +27,62 @@ function addContent() {
     todoDivInput.className = "item_input";
 
 
+    let spanText = document.createElement('span');
+    spanText.className = "text";
+
+
+    todoDivInput.append(spanText);
+
+    spanText.innerHTML = inputText.value;
+    //console.log(todoDivInput.value);
+
+
+
     let spanBtn = document.createElement('span');
     spanBtn.className = "btns";
 
     todoDivInput.appendChild(spanBtn);
     //console.log(spanBtn);
 
-    //console.log(todoDivInput);
 
     //edit Button
     let editBtn = document.createElement('button');
     editBtn.innerHTML = "EDIT";
     editBtn.className = "editButton";
-    todoDivInput.appendChild(editBtn);
+    spanBtn.appendChild(editBtn);
 
     //delete Button
     let delBtn = document.createElement('button');
     delBtn.innerText = "DELETE";
     delBtn.className = "deleteButton";
-    todoDivInput.appendChild(delBtn);
+    spanBtn.appendChild(delBtn);
 
     contentContainer.append(todoDiv);
     todoDiv.append(todoDivInput);
-    // todoDivInput.append(spanBtn);
-    // todoDivInput.innerHTML = inputText.value;
 
-    spanBtn.innerHTML = inputText.value;
-
-    //todoDivInput.append(editBtn);
-    //todoDivInput.append(delBtn);
     inputText.value = "";
+
+
+    //delete btn
+    delBtn.addEventListener('click', del);
+
+    function del() {
+        todoDiv.remove();
+
+    }
+
+    editBtn.addEventListener('click', editTodo);
+
+
+    function editTodo(event) {
+
+        inputText.value = spanText.innerHTML;
+        spanText.innerHTML = del();
+        spanText.innerHTML = inputText.value;
+
+
+    }
+
 
 
 
